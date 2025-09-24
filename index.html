@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xin lỗi chị</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: pink;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      color: red;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #forgive {
+      background: lightgreen;
+      color: black;
+    }
+
+    #angry {
+      background: lightcoral;
+      color: white;
+    }
+
+    #flowers {
+      display: none;
+      margin-top: 20px;
+      font-size: 50px;
+      animation: pop 0.6s ease forwards;
+    }
+
+    #messages {
+      margin-top: 20px;
+      width: 80%;
+      max-height: 200px;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.6);
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Em xin lỗi chị 😔</h1>
+
+  <div class="buttons">
+    <button id="forgive">Tha thứ 💚</button>
+    <button id="angry">Giận mãi mãi 😡</button>
+  </div>
+
+  <div id="flowers">💐💐💐</div>
+
+  <div id="messages"></div>
+
+  <script>
+    const forgiveBtn = document.getElementById("forgive");
+    const angryBtn = document.getElementById("angry");
+    const flowers = document.getElementById("flowers");
+    const messages = document.getElementById("messages");
+
+    let forgiveSize = 1;
+
+    const apologyTexts = [
+      "Em xin lỗi mò 🥺",
+      "Xin lỗi thỏ nhiều 😔",
+      "Đừng giận nữa mà thỏ ơi 😢",
+      "Em biết lỗi ròi mò 🙏",
+      "Cho em cơ hội sửa sai nha 💕"
+    ];
+
+    // hàm tạo câu xin lỗi ngẫu nhiên
+    function showApology() {
+      const randomText = apologyTexts[Math.floor(Math.random() * apologyTexts.length)];
+      const p = document.createElement("p");
+      p.textContent = randomText;
+      messages.appendChild(p);
+      messages.scrollTop = messages.scrollHeight; // auto cuộn xuống cuối
+    }
+
+    angryBtn.addEventListener("click", () => {
+      forgiveSize += 0.3; 
+      forgiveBtn.style.transform = `scale(${forgiveSize})`;
+      showApology();
+    });
+
+    forgiveBtn.addEventListener("click", () => {
+      flowers.style.display = "block"; 
+      document.querySelector("h1").textContent = "Cảm ơn chị đã tha thứ ❤️";
+      document.body.style.background = "lightyellow";
+      showApology();
+    });
+  </script>
+</body>
+</html>
